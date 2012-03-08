@@ -1,0 +1,58 @@
+body {
+	font-family: "Century Gothic";
+}
+
+section{
+	background-color: #333333;
+	border: solid 1px #ffffff;
+	border-radius: 15px;
+	padding: 1.5em;
+	box-shadow: 0 0 3px 3px #161616;
+	width: 320px;
+}
+
+label{
+	display:block;
+	color:#ffffff;
+	font-size: 24px;
+	margin-bottom: 10px;
+	margin-top: -5px;
+}
+
+.campo{
+	height: 23px;
+	padding: 0.1em;
+	border: solid 1px #ffffff;
+	border-radius: 5px;
+}
+
+.botonlogin{
+	margin-top:10px;
+	display: block;
+	height: 28px;
+	width: 80px;
+	padding: 0.1em;
+	border: solid 1px #ffffff;
+	border-radius: 5px;
+	background-color: #cc0000;
+	color: #ffffff;
+	font-size: 15px;
+	font-weight:500;
+}
+
+.sitio{
+	margin-top:10px;
+	margin-bottom:10px;
+	display: block;
+	width: 314px;
+	height: 23px;
+	padding: 0.1em;
+	border: solid 1px #ffffff;
+	border-radius: 5px;
+}
+
+textarea{
+	padding: 0.1em;
+	border: solid 1px #ffffff;
+	border-radius: 5px;
+}
