@@ -108,5 +108,40 @@
 				</tr>
 				</tbody>
 			</table>";
-	}}
+	}
+	echo "	POR LA EMPRESA <br />
+			ADMINISTRADOR DE CONTRATO<br />
+			Nombre:<br />
+			C.I:<br />
+			Fecha:<br />
+			Firma:<br />
+			<br />
+			GERENTE<br />
+			Nombre:<br />
+			C.I:<br />
+			Fecha:<br />
+			Firma:<br /><br />";
+			//y al lado derecho van los de la otra empresa
+	echo"	SUPERVISOR<br />
+			Nombre:<br />
+			C.I:<br />
+			Fecha:<br />
+			Firma:<br /><br />
+			APROBACION<br />
+			Nombre:<br />
+			C.I:<br />
+			Fecha:<br />
+			Firma:<br /><br />
+			CERTIFICACION<br />
+			Nombre:<br />
+			C.I:<br />
+			Fecha:<br />
+			Firma:<br /><br />
+			ADMINISTRACION DE CONTRATOS<br />
+			Nombre:<br />
+			C.I:<br />
+			Fecha:<br />
+			Firma:<br /><br />
+	";	
+}
 ?>
