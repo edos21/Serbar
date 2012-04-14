@@ -1,0 +1,25 @@
+la seccion de partidas se encarga de almacenar los datos de una obra que se este
+realizando ademas de las valuaciones que son los viajes que se realizan en una 
+determinada fecha, estos se deducen de la cantidad total de viajes e indican asi
+la cantidad de viajes restantes.
+
+tabla partidas
+Nombre		-		Descripcion
+id					ID para cada obra
+n_obra				Numero de obra
+obra				Nombre de la obra
+n_partida			Numero de la partida
+partida				Descripcion de la partida
+viaje				Tipo de viaje
+cantidad			Cantidad de viajes
+precio				Precio Unitario de cada viaje
+cejecutada			Cantidad de viajes Ejecutados (tomados de cada valuacion)
+cdisponible			Cantidad de viajes Disponibles (tomados de cada valuacion)
+
+tabla valuacion
+id					Id para la valuacion
+n_obra				Numero de la obra a la q pertenece, debe ser igual a la tabla partidas
+n_partida			Numero de la partida a la q pertenece
+valuacion			Numero de la valuacion realizada
+cantidad			Cantidad realizada
+total				Precio de valuacion (esta es calculada a traves del precio unitario)

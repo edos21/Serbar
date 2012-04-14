@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 08-04-2012 a las 17:39:25
+-- Tiempo de generación: 14-04-2012 a las 03:58:14
 -- Versión del servidor: 5.5.8
 -- Versión de PHP: 5.3.5
 
@@ -27,16 +27,19 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 
 CREATE TABLE IF NOT EXISTS `escofactura` (
   `n_factura` int(10) NOT NULL AUTO_INCREMENT,
-  `filial` varchar(10) DEFAULT NULL,
-  `codigo` varchar(10) DEFAULT NULL,
+  `filial` varchar(20) DEFAULT NULL,
+  `rif` varchar(10) DEFAULT NULL,
   `nombre_emp` varchar(35) DEFAULT NULL,
+  `direccion` text,
+  `telefono` varchar(15) DEFAULT NULL,
   `mail` varchar(50) DEFAULT NULL,
   `cedula` varchar(12) DEFAULT NULL,
   `nombre` varchar(40) DEFAULT NULL,
   `status` varchar(11) DEFAULT NULL,
-  `precio` double DEFAULT NULL,
+  `total` float DEFAULT NULL,
   `fecha` varchar(10) DEFAULT NULL,
   `n_presupuesto` int(10) DEFAULT NULL,
+  `observacion` text,
   PRIMARY KEY (`n_factura`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
@@ -52,23 +55,75 @@ CREATE TABLE IF NOT EXISTS `escofactura` (
 --
 
 CREATE TABLE IF NOT EXISTS `escojjfactura` (
-  `factura` varchar(10) NOT NULL,
-  `codigo` varchar(10) DEFAULT NULL,
+  `n_factura` int(10) NOT NULL AUTO_INCREMENT,
+  `ciudad` varchar(20) DEFAULT NULL,
+  `rif` varchar(10) DEFAULT NULL,
   `nombre_emp` varchar(35) DEFAULT NULL,
+  `direccion` text,
+  `telefono` varchar(15) DEFAULT NULL,
   `mail` varchar(50) DEFAULT NULL,
-  `nombre` varchar(50) DEFAULT NULL,
-  `tipo` varchar(50) DEFAULT NULL,
-  `costo_m` float DEFAULT NULL,
-  `materiales` varchar(50) DEFAULT NULL,
-  `costo_mat` float DEFAULT NULL,
-  `orden` varchar(10) DEFAULT NULL,
-  `precio` float DEFAULT NULL,
-  `status` varchar(15) DEFAULT NULL,
-  PRIMARY KEY (`factura`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `cedula` varchar(12) DEFAULT NULL,
+  `nombre` varchar(40) DEFAULT NULL,
+  `status` varchar(11) DEFAULT NULL,
+  `orden` varchar(20) DEFAULT NULL,
+  `total` float DEFAULT NULL,
+  `fecha` varchar(10) DEFAULT NULL,
+  `n_presupuesto` int(10) DEFAULT NULL,
+  `observacion` text,
+  PRIMARY KEY (`n_factura`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 --
 -- Volcar la base de datos para la tabla `escojjfactura`
+--
+
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `escojjpresupuesto`
+--
+
+CREATE TABLE IF NOT EXISTS `escojjpresupuesto` (
+  `n_presupuesto` int(10) NOT NULL DEFAULT '0',
+  `ciudad` varchar(20) DEFAULT NULL,
+  `fecha` varchar(12) DEFAULT NULL,
+  `rif` varchar(15) DEFAULT NULL,
+  `nombre_emp` varchar(35) DEFAULT NULL,
+  `telefono` varchar(20) DEFAULT NULL,
+  `direccion` text,
+  `mail` varchar(50) DEFAULT NULL,
+  `cedula` varchar(12) DEFAULT NULL,
+  `nombre` varchar(40) DEFAULT NULL,
+  `status` varchar(11) DEFAULT NULL,
+  `orden` varchar(20) DEFAULT NULL,
+  `impuesto` float DEFAULT NULL,
+  `observacion` text,
+  PRIMARY KEY (`n_presupuesto`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcar la base de datos para la tabla `escojjpresupuesto`
+--
+
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `escojjservicios`
+--
+
+CREATE TABLE IF NOT EXISTS `escojjservicios` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `n_presupuesto` int(10) DEFAULT NULL,
+  `cantidad` int(11) DEFAULT NULL,
+  `descripcion` text,
+  `precio` float DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+--
+-- Volcar la base de datos para la tabla `escojjservicios`
 --
 
 
@@ -105,14 +160,18 @@ CREATE TABLE IF NOT EXISTS `escopartida` (
 
 CREATE TABLE IF NOT EXISTS `escopresupuesto` (
   `n_presupuesto` int(10) NOT NULL DEFAULT '0',
-  `filial` varchar(10) DEFAULT NULL,
-  `codigo` varchar(10) DEFAULT NULL,
+  `filial` varchar(20) DEFAULT NULL,
+  `fecha` varchar(12) DEFAULT NULL,
+  `rif` varchar(15) DEFAULT NULL,
   `nombre_emp` varchar(35) DEFAULT NULL,
+  `telefono` varchar(20) DEFAULT NULL,
+  `direccion` text,
   `mail` varchar(50) DEFAULT NULL,
   `cedula` varchar(12) DEFAULT NULL,
   `nombre` varchar(40) DEFAULT NULL,
   `status` varchar(11) DEFAULT NULL,
-  `precio` double DEFAULT NULL,
+  `impuesto` float DEFAULT NULL,
+  `observacion` text,
   PRIMARY KEY (`n_presupuesto`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -145,6 +204,26 @@ CREATE TABLE IF NOT EXISTS `escoresumen` (
 
 --
 -- Volcar la base de datos para la tabla `escoresumen`
+--
+
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `escoservicios`
+--
+
+CREATE TABLE IF NOT EXISTS `escoservicios` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `n_presupuesto` int(10) DEFAULT NULL,
+  `cantidad` int(11) DEFAULT NULL,
+  `descripcion` text,
+  `precio` float DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+--
+-- Volcar la base de datos para la tabla `escoservicios`
 --
 
 
@@ -257,16 +336,19 @@ CREATE TABLE IF NOT EXISTS `escovaluacion` (
 
 CREATE TABLE IF NOT EXISTS `factura` (
   `n_factura` int(10) NOT NULL AUTO_INCREMENT,
-  `filial` varchar(10) DEFAULT NULL,
-  `codigo` varchar(10) DEFAULT NULL,
+  `filial` varchar(20) DEFAULT NULL,
+  `rif` varchar(10) DEFAULT NULL,
   `nombre_emp` varchar(35) DEFAULT NULL,
+  `direccion` text,
+  `telefono` varchar(15) DEFAULT NULL,
   `mail` varchar(50) DEFAULT NULL,
   `cedula` varchar(12) DEFAULT NULL,
   `nombre` varchar(40) DEFAULT NULL,
   `status` varchar(11) DEFAULT NULL,
-  `precio` double DEFAULT NULL,
+  `total` float DEFAULT NULL,
   `fecha` varchar(10) DEFAULT NULL,
   `n_presupuesto` int(10) DEFAULT NULL,
+  `observacion` text,
   PRIMARY KEY (`n_factura`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
@@ -282,23 +364,75 @@ CREATE TABLE IF NOT EXISTS `factura` (
 --
 
 CREATE TABLE IF NOT EXISTS `jjfactura` (
-  `factura` varchar(10) NOT NULL,
-  `codigo` varchar(10) DEFAULT NULL,
+  `n_factura` int(10) NOT NULL AUTO_INCREMENT,
+  `ciudad` varchar(20) DEFAULT NULL,
+  `rif` varchar(10) DEFAULT NULL,
   `nombre_emp` varchar(35) DEFAULT NULL,
+  `direccion` text,
+  `telefono` varchar(15) DEFAULT NULL,
   `mail` varchar(50) DEFAULT NULL,
-  `nombre` varchar(50) DEFAULT NULL,
-  `tipo` varchar(50) DEFAULT NULL,
-  `costo_m` float DEFAULT NULL,
-  `materiales` varchar(50) DEFAULT NULL,
-  `costo_mat` float DEFAULT NULL,
-  `orden` varchar(10) DEFAULT NULL,
-  `precio` float DEFAULT NULL,
-  `status` varchar(15) DEFAULT NULL,
-  PRIMARY KEY (`factura`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `cedula` varchar(12) DEFAULT NULL,
+  `nombre` varchar(40) DEFAULT NULL,
+  `status` varchar(11) DEFAULT NULL,
+  `orden` varchar(20) DEFAULT NULL,
+  `total` float DEFAULT NULL,
+  `fecha` varchar(10) DEFAULT NULL,
+  `n_presupuesto` int(10) DEFAULT NULL,
+  `observacion` text,
+  PRIMARY KEY (`n_factura`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 --
 -- Volcar la base de datos para la tabla `jjfactura`
+--
+
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `jjpresupuesto`
+--
+
+CREATE TABLE IF NOT EXISTS `jjpresupuesto` (
+  `n_presupuesto` int(10) NOT NULL DEFAULT '0',
+  `ciudad` varchar(20) DEFAULT NULL,
+  `fecha` varchar(12) DEFAULT NULL,
+  `rif` varchar(15) DEFAULT NULL,
+  `nombre_emp` varchar(35) DEFAULT NULL,
+  `telefono` varchar(20) DEFAULT NULL,
+  `direccion` text,
+  `mail` varchar(50) DEFAULT NULL,
+  `cedula` varchar(12) DEFAULT NULL,
+  `nombre` varchar(40) DEFAULT NULL,
+  `status` varchar(11) DEFAULT NULL,
+  `orden` varchar(20) DEFAULT NULL,
+  `impuesto` float DEFAULT NULL,
+  `observacion` text,
+  PRIMARY KEY (`n_presupuesto`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcar la base de datos para la tabla `jjpresupuesto`
+--
+
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `jjservicios`
+--
+
+CREATE TABLE IF NOT EXISTS `jjservicios` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `n_presupuesto` int(10) DEFAULT NULL,
+  `cantidad` int(11) DEFAULT NULL,
+  `descripcion` text,
+  `precio` float DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+--
+-- Volcar la base de datos para la tabla `jjservicios`
 --
 
 
@@ -335,14 +469,18 @@ CREATE TABLE IF NOT EXISTS `partida` (
 
 CREATE TABLE IF NOT EXISTS `presupuesto` (
   `n_presupuesto` int(10) NOT NULL DEFAULT '0',
-  `filial` varchar(10) DEFAULT NULL,
-  `codigo` varchar(10) DEFAULT NULL,
+  `filial` varchar(20) DEFAULT NULL,
+  `fecha` varchar(12) DEFAULT NULL,
+  `rif` varchar(15) DEFAULT NULL,
   `nombre_emp` varchar(35) DEFAULT NULL,
+  `telefono` varchar(20) DEFAULT NULL,
+  `direccion` text,
   `mail` varchar(50) DEFAULT NULL,
   `cedula` varchar(12) DEFAULT NULL,
   `nombre` varchar(40) DEFAULT NULL,
   `status` varchar(11) DEFAULT NULL,
-  `precio` double DEFAULT NULL,
+  `impuesto` float DEFAULT NULL,
+  `observacion` text,
   PRIMARY KEY (`n_presupuesto`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -375,6 +513,26 @@ CREATE TABLE IF NOT EXISTS `resumen` (
 
 --
 -- Volcar la base de datos para la tabla `resumen`
+--
+
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `servicios`
+--
+
+CREATE TABLE IF NOT EXISTS `servicios` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `n_presupuesto` int(10) DEFAULT NULL,
+  `cantidad` int(11) DEFAULT NULL,
+  `descripcion` text,
+  `precio` float DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+--
+-- Volcar la base de datos para la tabla `servicios`
 --
 
 
@@ -451,7 +609,7 @@ CREATE TABLE IF NOT EXISTS `sol_viaje` (
   `precio` float DEFAULT NULL,
   `n_solicitud` int(10) DEFAULT NULL,
   PRIMARY KEY (`codigo`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
 
 --
 -- Volcar la base de datos para la tabla `sol_viaje`

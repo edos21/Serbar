@@ -1,9 +1,18 @@
 <?php
-	$conexion=mysql_connect("localhost","root","");
-	mysql_select_db("bdserbar",$conexion);
-	$registro=mysql_query("insert into escopresupuesto(n_presupuesto,filial,codigo,nombre_emp,mail,cedula,nombre,status,precio)
-	values('$_REQUEST[presupuesto]','$_REQUEST[filial]','$_REQUEST[codigo]','$_REQUEST[nombre_emp]','$_REQUEST[mail]','$_REQUEST[cedula]','$_REQUEST[nombre]','$_REQUEST[status]',$_REQUEST[precio])",$conexion);
+	include ("../../../conexion.php");
+	$registro=mysql_query("insert into escopresupuesto(n_presupuesto,filial,fecha,rif,nombre_emp,telefono,direccion,mail,cedula,nombre,status,impuesto)
+	values('$_REQUEST[presupuesto]','$_REQUEST[filial]','$_REQUEST[fecha]','$_REQUEST[rif]','$_REQUEST[nombre_emp]','$_REQUEST[telefono]','$_REQUEST[direccion]','$_REQUEST[mail]','$_REQUEST[cedula]','$_REQUEST[nombre]','$_REQUEST[status]','$_REQUEST[impuesto]')",$conexion) or die(mysql_error());
 	mysql_close($conexion);
-	echo "presupuesto guardado<br />";
-	echo "<a href='/serbar/esco/facturacion/presupuesto'>volver</a>";
 ?>
+<!DOCTYPE html>
+<html lang="es">
+	<head>
+		<meta charset="UTF-8" />
+		<title>Guardar - Presupuesto</title>
+		<link rel="stylesheet" href="../css/administracion.css" type="text/css"/> 
+	</head>
+	<body>
+		<label>Datos Guardados</label><br />
+		<a href="/serbar/esco/facturacion/presupuesto">Volver</a>
+	</body>
+</html>

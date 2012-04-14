@@ -1,17 +1,33 @@
 <?php
-$conexion=mysql_connect("localhost","root","") or
-die ("error al conectar");
-mysql_select_db("bdserbar",$conexion) or
-die ("error en la tabla");
+//elimina solo 1 valuacion de 1 obra
+include ("../../conexion.php");
 $registro=mysql_query("select * from valuacion where n_obra='$_REQUEST[n_obra]'and n_partida='$_REQUEST[n_partida]' and valuacion='$_REQUEST[valuacion]'",$conexion) or
 die ("error en select: ".mysql_error());
-if ($reg=mysql_fetch_array($registro)){
-	mysql_query("delete from valuacion where n_obra='$_REQUEST[n_obra]' and n_partida='$_REQUEST[n_partida]' and valuacion='$_REQUEST[valuacion]'",$conexion) or
-	die("error en delete: ".mysql_error());
-	echo "borrado exitoso! <a href='/serbar/partidas/valuacion'>volver</a>";
-}
-else {
-	echo "valuacion inexistente, verifique <a href='/serbar/partidas/valuacion'>volver</a>";
-}
-mysql_close($conexion);
- ?>
+?>
+<!DOCTYPE html>
+<html lang="es">
+	<head>
+		<meta charset="UTF-8" />
+		<title>Eliminar - Valuacion de partidas</title>
+		<link rel="stylesheet" href="../css/administracion.css" type="text/css"/>
+	</head>
+	<body>
+	<?php
+	if ($reg=mysql_fetch_array($registro)){
+		mysql_query("delete from valuacion where n_obra='$_REQUEST[n_obra]' and n_partida='$_REQUEST[n_partida]' and valuacion='$_REQUEST[valuacion]'",$conexion) or
+		die("error en delete: ".mysql_error());
+	?>
+		<label>Borrado exitoso!</label>
+		<a href='/serbar/partidas/valuacion/'>Volver</a>
+	<?php
+	}
+	else {
+	?>
+		<label>Valuacion inexistente, verifique</label>
+		<a href='eliminar.php'>volver</a>
+	<?php
+	}
+	mysql_close($conexion);
+	?>
+	</body>
+</html>

@@ -1,0 +1,44 @@
+Esta seccion de servicios se encarga de el manejo de los datos de alguna solicitud
+de viaje realizada y los distintos servicios prestados los campos utilizados son
+Tabla Solicitud
+
+Nombre		-		Descripcion
+n_solicitud			Numero de solicitud
+fecha				Fecha en la que se elaboro la solicitud
+cedula				Cedula del operador que realizo el servicio
+nombre				Nombre del operador que realizo el servicio
+c_operador			Costo del operador que realizo el servicio
+c_servicio			Costo del servicio prestado
+utilidad			Utilidad que reporto dicho servicio
+viaje				Viajes realizados
+cviaje				Costo de los viajes
+ldiurna				Carreras locales diurnas
+cldiurna			Costo de las Carreras locales diurnas
+lnocturna			Carreras locales nocturnas
+clnocturna			Costo de las Carreras locales Nocturnas
+lldiurna			Carreras largas locales diurnas
+clldiurna			Costo de las Carreras largas locales diurnas
+llnocturna			Carreras largas locales nocturnas
+cllnocturna			Costo de las Carreras largas locales nocturnas
+hdiurna				Horas de espera diurnas
+chdiurna			Costo de las horas de espera diurnas
+hnocturna			Horas de espera nocturnas
+chnocturna			Costo de las horas de espera nocturnas
+bonon				Bono Nocturno
+cbonon				Costo del bono nocturno
+bonof				Bono Feriado
+cbonof				Costo del bono feriado
+
+Tabla sol_viaje
+codigo				Codigo del viaje
+origen				Origen del viaje
+destino				Destino del viaje
+tipo				Tipo de viaje
+precio				Precio del viaje
+n_solicitud			Numero de la solicitud a la cual pertenece
+
+Tabla sol_otro
+codigo				Codigo del viaje
+otro				Descripcion del viaje
+precio				Precio del viaje
+n_solicitud			Numero de la solicitud a la cual pertenece

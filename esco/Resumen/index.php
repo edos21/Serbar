@@ -1,33 +1,35 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 	<head>
+		<meta charset="UTF-8" />
 		<title>Ficha Resumen</title>
+		<link rel="stylesheet" href="../css/administracion.css" type="text/css"/> 
 	</head>
 	<body>
 		<form method="post" action="guardar.php">
-			Numero de nota: 
+			<label>Numero de nota: </label>
 			<input type="text" name="nota" />
-			Numero de Factura:
+			<label>Numero de Factura: </label>
 			<input type="text" name="factura"/>
-			Fecha: 
+			<label>Fecha: </label>
 			<input type="text" name="fecha"/>
-			Cedula operador:
+			<label>Cedula operador: </label>
 			<input type="text" name="cedula" />
-			Nombre operador:
+			<label>Nombre operador: </label>
 			<input type="text" name="nombre" />
-			Origen: 
+			<label>Origen: </label>
 			<input type="text" name="origen" />
-			Destino: 
+			<label>Destino: </label>
 			<input type="text" name="destino" />
-			Producto: 
+			<label>Producto: </label>
 			<input type="text" name="producto" />
-			Cantidad: 
+			<label>Cantidad: </label>
 			<input type="text" name="cantidad" />
-			Sector:
+			<label>Sector: </label>
 			<input type="text" name="sector" />
-			Coordinador:
+			<label>Coordinador: </label>
 			<input type="text" name="coordinador" />
-			Observacion:
+			<label>Observacion: </label>
 			<textarea name="observacion" cols="30" rows="5"></textarea>
 			<input type="submit" value="Guardar" />
 			<input type="reset" value="Cancelar" />

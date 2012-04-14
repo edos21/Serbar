@@ -1,9 +1,17 @@
 <?php
-    $conexion=mysql_connect("localhost","root","") or
-    die("error al conectar");
-	mysql_select_db("bdserbar",$conexion) or 
-	die("error en base de datos");
+    include ("../../../conexion.php");
 	$registro=mysql_query("update escopartida set obra='$_REQUEST[obran]', partida='$_REQUEST[partidan]', viaje='$_REQUEST[viajen]', cantidad='$_REQUEST[cantidadn]', precio='$_REQUEST[precion]' where n_obra='$_REQUEST[n_obra]' and n_partida='$_REQUEST[n_partida]'",$conexion) or
 	die("error en el select".mysql_error());
-	echo "datos modificados <a href='/serbar/esco/partidas/obra'>volver</a>";
 ?>
+<!DOCTYPE html>
+<html lang="es">
+	<head>
+		<meta charset="UTF-8" />
+		<title>Modificar - Obra de Partida</title>
+		<link rel="stylesheet" href="../css/administracion.css" type="text/css" 
+	</head>
+	<body>
+		<label>Datos Modificados</label><br />
+		<a href="/serbar/esco/partidas/obra">Volver</a>
+	</body>
+</html>

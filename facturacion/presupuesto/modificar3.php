@@ -1,9 +1,17 @@
 <?php
-    $conexion=mysql_connect("localhost","root","") or
-    die("error al conectar");
-	mysql_select_db("bdserbar",$conexion) or 
-	die("error en base de datos");
-	$registro=mysql_query("update presupuesto set filial='$_REQUEST[filialn]', codigo='$_REQUEST[codigon]', nombre_emp='$_REQUEST[nombre_empn]', mail='$_REQUEST[mailn]', cedula='$_REQUEST[cedulan]', nombre='$_REQUEST[nombren]', status='$_REQUEST[statusn]', precio='$_REQUEST[precion]' where n_presupuesto='$_REQUEST[presupuesto]'",$conexion) or
+    include ("../../conexion.php");
+	$registro=mysql_query("update presupuesto set filial='$_REQUEST[filialn]', fecha='$_REQUEST[fechan]', rif='$_REQUEST[rifn]', nombre_emp='$_REQUEST[nombre_empn]', telefono='$_REQUEST[telefonon]', direccion='$_REQUEST[direccionn]', mail='$_REQUEST[mailn]', cedula='$_REQUEST[cedulan]', nombre='$_REQUEST[nombren]', status='$_REQUEST[statusn]', impuesto='$_REQUEST[impueston]' where n_presupuesto='$_REQUEST[presupuesto]'",$conexion) or
 	die("error en el select".mysql_error());
-	echo "datos modificados <a href='/serbar/facturacion/presupuesto'>volver</a>";
 ?>
+<!DOCTYPE html>
+<html lang="es">
+	<head>
+		<meta charset="UTF-8" />
+		<title>Modificar - Presupuesto</title>
+		<link rel="stylesheet" href="../css/administracion.css" type="text/css" /> 
+	</head>
+	<body>
+		<label>Datos Modificados</label><br />
+		<a href="/serbar/facturacion/presupuesto">Volver</a>
+	</body>
+</html>

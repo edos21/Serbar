@@ -1,23 +1,25 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 	<head>
+		<meta charset="UTF-8" />
 		<title>Tabulador de Precios</title>
+		<link rel="stylesheet" href="../css/administracion.css" type="text/css"/> 
 	</head>
 	<body>
 		<form action="guardar.php" method="post">
-			Solicitud #:
+			<label>Solicitud #: </label>
 			<input type="text" name="solicitud" />
-			Fecha:
+			<label>Fecha: </label>
 			<input type="text" name="fecha" />
 			<br />
 			<br />
-			Origen:
+			<label>Origen: </label>
 			<input type="text" name="origen" />
-			Destino:
+			<label>Destino: </label>
 			<input type="text" name="destino" />
-			Tipo:
+			<label>Tipo: </label>
 			<input type="text" name="tipo" />
-			Precio:
+			<label>Precio: </label>
 			<input type="text" name="precio" />
 			<!--los elementos origen, destino, tipo, precio y solicitud van en
 				la tabla llamada sol_otro esto es lo que guardaras usando ajax
@@ -27,66 +29,66 @@
 			<input type="button" value="Guardar"/>
 			<br />
 			<br />
-			Datos del Operador<br />
-			Cedula:
+			<label>Datos del Operador</label><br />
+			<label>Cedula: </label>
 			<input type="text" name="cedula" />
-			Nombre:
+			<label>Nombre: </label>
 			<input type="text" name="nombre" />
-			Costo Operador:
+			<label>Costo Operador: </label>
 			<input type="text" name="costo_oper" />
-			Costo Servicio:
+			<label>Costo Servicio: </label>
 			<input type="text" name="costo_ser" />
-			Utilidad:
+			<label>Utilidad: </label>
 			<input type="text" name="utilidad" />
 			<br />
-			viaje:
+			<label>Viaje: </label>
 			<input type="text" name="viaje" />
-			costo:
+			<label>Costo: </label>
 			<input type="text" name="cviaje" />
 			<br />
-			Carrerla local diurna:
+			<label>Carrera local diurna: </label>
 			<input type="text" name="ldiurna" />
-			costo:
+			<label>Costo: </label>
 			<input type="text" name="cldiurna" />
 			<br />
-			Carrera local nocturna:
+			<label>Carrera local nocturna: </label>
 			<input type="text" name="lnocturna" />
-			costo:
+			<label>Costo: </label>
 			<input type="text" name="clnocturna" />
 			<br />
-			Carrerla local larga diurna:
+			<label>Carrera local larga diurna: </label>
 			<input type="text" name="lldiurna" />
-			costo:
+			<label>Costo: </label>
 			<input type="text" name="clldiurna" />
 			<br />
-			Carrera local larga nocturna:
+			<label>Carrera local larga nocturna: </label>
 			<input type="text" name="llnocturna" />
-			costo:
+			<label>Costo: </label>
 			<input type="text" name="cllnocturna" />
 			<br />
-			Hora de espera diurna:
+			<label>Hora de espera diurna:</label>
 			<input type="text" name="hdiurna" />
-			costo:
+			<label>Costo: </label>
 			<input type="text" name="chdiurna" />
 			<br />
-			Hora de espera nocturna:
+			<label>Hora de espera nocturna: </label>
 			<input type="text" name="hnocturna" />
-			costo:
+			<label>Costo: </label>
 			<input type="text" name="chnocturna" />
 			<br />
-			Bono nocturno lunes a viernes:
+			<label>Bono nocturno lunes a viernes: </label>
 			<input type="text" name="bonon" />
-			costo:
+			<label>Costo: </label>
 			<input type="text" name="cbonon" />
 			<br />
-			Bono feriado / fin de semana:
+			<label>Bono feriado / Fin de semana: </label>
 			<input type="text" name="bonof" />
-			costo:
+			<label>Costo: </label>
 			<input type="text" name="cbonof" />
 			<br />
-			otros:
+			<label>Otros: </label>
 			<input type="text" name="otro" />
-			costo:
+			<label>Costo: </label>
 			<input type="text" name="cotro" />
 			<!-- aqui tambien se usara ajax, los elementos otro, cotro y solicitud se
 				almacenan en la tabla sol_otro y adicional se borra solo otro y cotro

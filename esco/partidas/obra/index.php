@@ -1,7 +1,9 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 	<head>
+		<meta charset="UTF-8" />
 		<title>Registro de obra de partida</title>
+		<link rel="stylesheet" href="../css/administracion.css" type="text/css"/>
 	</head>
 	<body>
 		<form method="post" action="guardar.php">

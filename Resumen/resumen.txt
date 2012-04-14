@@ -1,0 +1,17 @@
+en esta seccion se muestra un resumen de los viajes realizados por cada operador
+en una hoja que entrega cada operador a serbar
+
+tabla resumen
+Nombre		-		Descripcion
+nota				Numero de nota que se entrego
+factura				Numero de la factura de serbar
+fecha				Fecha del viaje
+cedula				Cedula del operador
+nombre				Nombre del operador
+origen				Origen del viaje
+destino				Destino del viaje
+producto			Producto transportado
+cantidad			Cantidad transportada
+sector				Sector al que se realizo
+coordinador			Coordinador que recibe la nota
+observacion			observacion	

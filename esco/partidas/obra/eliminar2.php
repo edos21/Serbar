@@ -1,11 +1,19 @@
 <?php
-$conexion=mysql_connect("localhost","root","") or
-die ("error al conectar");
-mysql_select_db("bdserbar",$conexion) or
-die ("error en la tabla");
+//elimina los datos de 1 obra con todas sus partidas y sus valuaciones
+include ("../../../conexion.php");
 $registro=mysql_query("select * from escopartida where n_obra='$_REQUEST[n_obra]' and n_partida='$_REQUEST[n_partida]'",$conexion) or
 die ("error en select: ".mysql_error());
-if ($reg=mysql_fetch_array($registro)){
+?>
+<!DOCTYPE html>
+<html lang="es">
+	<head>
+		<meta charset="UTF-8" />
+		<title>Eliminar - Obra de partidas</title>
+		<link rel="stylesheet" href="../css/administracion.css" type="text/css"/>
+	</head>
+	<body>
+	<?php
+	if ($reg=mysql_fetch_array($registro)){
 	mysql_query("delete from escopartida where n_obra='$_REQUEST[n_obra]' and n_partida='$_REQUEST[n_partida]'",$conexion) or
 	die("error en select: ".mysql_error());
 	$registro2=mysql_query("select * from escovaluacion where n_obra='$_REQUEST[n_obra]' and n_partida='$_REQUEST[n_partida]'",$conexion) or
@@ -14,10 +22,18 @@ if ($reg=mysql_fetch_array($registro)){
 		mysql_query("delete from escovaluacion where n_obra='$_REQUEST[n_obra]' and n_partida='$_REQUEST[n_partida]'",$conexion) or
 		die("error en select: ".mysql_error());
 	}
-	echo "borrado exitoso! <a href='/serbar/esco/partidas/obra'>volver</a>";
+	?>
+	<label>Borrado exitoso!</label>
+	<a href='/serbar/esco/partidas/obra'>Volver</a>
+<?php
 }
 else {
-	echo "tarifa inexistente, verifique <a href='eliminar.php'>volver</a>";
+?>
+	<label>Obra inexistente, verifique</label>
+	<a href='eliminar.php'>volver</a>
+<?php
 }
 mysql_close($conexion);
- ?>
+?>
+	</body>
+</html>

@@ -1,0 +1,42 @@
+esta seccion de facturacion es para crear presupuestos que luego pasaran a ser facturas
+o en otros casos pasaran a estar anuladas, pendientes, en evaluacion, o rechazadas
+al ser facturas es posible realizar los pagos correspondientes
+Tabla presupuesto
+
+nombre		-		descripcion
+n_presupuesto		numero de presupuesto
+filial				filial que realizo el presupuesto
+fecha				fecha en q se realiza el presupuesto
+rif					Rif de la empresa que solicita el presupuesto
+nombre_emp			nombre de la empresa q solicita el presupuesto
+telefono			telefono de la empresa
+direccion			direccion fisica de la empresa
+mail				correo electronico de la empresa
+cedula				cedula del operador que presta el servicio
+nombre				nombre del operedor
+status				status en que se encuentra el presupuesto
+impuesto			impuesto que se cobrara (porcentaje)
+observacion			observacion que se hace en caso de que se anule el presupuesto
+
+Tabla factura
+n_factura			Numero de factura
+filial				filial que realiza la factura
+rif					rif de la empresa que se factura
+nombre_emp			nombre de la empresa que factura
+direccion			direccion de la empresa que factura
+telefono			telefono de la empresa que factura
+mail				correo electronico
+cedula				cedula del operador que presta el servicio
+nombre				nombre del operador
+status				starus de la factura
+total				total de la factura incluyendo impuestos
+fecha				fecha en que se factura
+n_presupuest		numero del presupuesto con que se relacion
+observacion			observacion que se hace en caso de que se anule la factura
+
+Tabla Servicios
+id					Id del servicio
+n_presupuesto		numero del presupuesto con que se relaciona
+cantidad			cantidad de servicios prestados
+descripcion			descripcion del servicio
+precio				precio unitario del servicio

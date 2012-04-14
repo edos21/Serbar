@@ -1,11 +1,31 @@
 <?php
-	$conexion=mysql_connect("localhost","root","");
-	mysql_select_db("bdserbar",$conexion);
+//consulta que muestra 1 servicio completo q se haya realizado, basandose en la hoja de detalles de servicios, en esta ademas de los datos
+//aparecen los distintos viajes almacenados en la tabla sol_viaje(solicitud viaj) y sol_otro (solicitud otro)
+	include ("../../conexion.php");
 	$registro=mysql_query("select * from escosolicitud where n_solicitud='$_REQUEST[solicitud]'",$conexion) or
 	die("error en select: ".mysql_error());
+	$registro2=mysql_query("select * from escosol_viaje where n_solicitud='$_REQUEST[solicitud]'",$conexion) or
+	die("error en select: ".mysql_error());
+	$n=0;
+	$registro3=mysql_query("select * from escosolicitud where n_solicitud='$_REQUEST[solicitud]'",$conexion) or
+	die("error en select: ".mysql_error());
+	$registro4=mysql_query("select * from escosol_otro where n_solicitud='$_REQUEST[solicitud]'",$conexion) or
+	die("error en select: ".mysql_error());
+	$f=0;
+	?>
+<!DOCTYPE html>
+<html lang="es">
+	<head>
+		<meta charset="UTF-8" />
+		<title>Tabulador de Precios</title>
+		<link rel="stylesheet" href="../css/administracion.css" type="text/css"/>
+	</head>
+	<body>
+	<?php
 	if ($re=mysql_fetch_array($registro)){
-	echo "Solicitud numero: ".$re['n_solicitud']." <br />
-	<table summary='consulta de servicio por solicitud' border='1px'>
+	?>
+		<label>Solicitud numero: <?php echo $re['n_solicitud'] ?> </label> <br />
+		<table summary='consulta de servicio por solicitud' border='1px'>
 			<thead>
 				<tr>
 					<th scope='col' width='300px'>Origen</th>
@@ -17,31 +37,31 @@
 					<th scope='col'>Lugar</th>
 				</tr>
 			</thead>
-			<tbody>";}
-			$registro2=mysql_query("select * from escosol_viaje where n_solicitud='$_REQUEST[solicitud]'",$conexion) or
-			die("error en select: ".mysql_error());
-			$n=0;
-			while($reg=mysql_fetch_array($registro2)){
-				$n=$reg['precio']+$n;
-			echo"
+	<?php
+	while($reg=mysql_fetch_array($registro2)){
+	$n=$reg['precio']+$n;
+	?>
+			<tbody>
 				<tr>
-					<td>".$reg['origen']."</td>
-					<td>".$reg['destino']."</td>
-					<td>".$reg['precio']."</td>
-				</tr>";
+					<td><?php echo $reg['origen']?></td>
+					<td><?php echo $reg['destino']?></td>
+					<td><?php echo $reg['precio']?></td>
+				</tr>
+	<?php
 	}
-			echo "
+	?>
 				<tr>
-					<td colspan='2'>Total</td>
-					<td>".$total=$n."</td> <br />
+					<th colspan='2'>Total</th>
+					<td><?php echo $total=$n ?></td> <br />
+				</tr>
 			</tbody>
-			</table> <br />";
-			echo "recepcion de Servicios (Favor Conformar el servicio recibido)<br />
-			Firma del usuario: ____________________ Fecha: ".$re['fecha']."<br />
-			Observacion: _________________________________________________<br />
-			____________________________________________________________<br />
-			Operador: ".$re['nombre']." <br />";
-			echo "<table summary='consulta de servicios extra' border='1px'>
+			</table> <br />
+			<label>recepcion de Servicios (Favor Conformar el servicio recibido)</label><br />
+			<label>Firma del usuario: ____________________ Fecha: <?php echo $re['fecha'] ?></label><br />
+			<p>Observacion: _________________________________________________<br />
+			____________________________________________________________</p><br />
+			<label>Operador: <?php echo $re['nombre'] ?></label> <br />
+			<table summary='consulta de servicios extra' border='1px'>
 			<thead>
 				<tr>
 					<th scope='col' width='300px'>Tipo</th>
@@ -49,65 +69,68 @@
 					<th scope='col' width='100px'>Costo</th>
 				</tr>
 			</thead>
-			<tbody>";
-			$registro3=mysql_query("select * from escosolicitud where n_solicitud='$_REQUEST[solicitud]'",$conexion) or
-			die("error en select: ".mysql_error());
-			while($reg3=mysql_fetch_array($registro3)){
-			echo"
+			<tbody>
+	<?php
+	while($reg3=mysql_fetch_array($registro3)){
+	?>		
 				<tr>
-					<td>Viaje</td>
-					<td>".$reg3['viaje']."</td>
-					<td>".$reg3['cviaje']."</td>
+					<th>Viaje</th>
+					<td><?php echo $reg3['viaje']?></td>
+					<td><?php echo $reg3['cviaje']?></td>
 				</tr>
 				<tr>
-					<td>Carrera Local Diurna</td>
-					<td>".$reg3['ldiurna']."</td>
-					<td>".$reg3['cldiurna']."</td>
+					<th>Carrera Local Diurna</th>
+					<td><?php echo $reg3['ldiurna']?></td>
+					<td><?php echo $reg3['cldiurna']?></td>
 				</tr>
 				<tr>
-					<td>Carrera Local Nocturna</td>
-					<td>".$reg3['lnocturna']."</td>
-					<td>".$reg3['clnocturna']."</td>
+					<th>Carrera Local Nocturna</th>
+					<td><?php echo $reg3['lnocturna']?></td>
+					<td><?php echo $reg3['clnocturna']?></td>
 				</tr>
 				<tr>
-					<td>Carrera Local Larga Diurna</td>
-					<td>".$reg3['lldiurna']."</td>
-					<td>".$reg3['clldiurna']."</td>
+					<th>Carrera Local Larga Diurna</th>
+					<td><?php echo $reg3['lldiurna']?></td>
+					<td><?php echo $reg3['clldiurna']?></td>
 				</tr>
 				<tr>
-					<td>Carrera Local Larga Nocturna</td>
-					<td>".$reg3['llnocturna']."</td>
-					<td>".$reg3['cllnocturna']."</td>
+					<th>Carrera Local Larga Nocturna</th>
+					<td><?php echo $reg3['llnocturna']?></td>
+					<td><?php echo $reg3['cllnocturna']?></td>
 				</tr>
 				<tr>
-					<td>Hora de espera Diurna</td>
-					<td>".$reg3['hdiurna']."</td>
-					<td>".$reg3['chdiurna']."</td>
+					<th>Hora de espera Diurna</th>
+					<td><?php echo $reg3['hdiurna']?></td>
+					<td><?php echo $reg3['chdiurna']?></td>
 				</tr>
 				<tr>
-					<td>Hora de espera Nocturna</td>
-					<td>".$reg3['hnocturna']."</td>
-					<td>".$reg3['chnocturna']."</td>
+					<th>Hora de espera Nocturna</th>
+					<td><?php echo $reg3['hnocturna']?></td>
+					<td><?php echo $reg3['chnocturna']?></td>
 				</tr>
 				<tr>
-					<td>Bono Nocturno Lunes a Viernes</td>
-					<td>".$reg3['bonon']."</td>
-					<td>".$reg3['cbonon']."</td>
+					<th>Bono Nocturno Lunes a Viernes</th>
+					<td><?php echo $reg3['bonon']?></td>
+					<td><?php echo $reg3['cbonon']?></td>
 				</tr>
 				<tr>
-					<td>Bono Feriado / Fin de Semana</td>
-					<td>".$reg3['bonof']."</td>
-					<td>".$reg3['cbonof']."</td>
-				</tr>";
+					<th>Bono Feriado / Fin de Semana</th>
+					<td><?php echo $reg3['bonof']?></td>
+					<td><?php echo $reg3['cbonof']?></td>
+				</tr>
+				<?php
 				$tot_ser= $reg3['cviaje']+$reg3['cldiurna']+$reg3['clnocturna']+$reg3['clldiurna']+$reg3['cllnocturna']+$reg3['chdiurna']+$reg3['chnocturna']+$reg3['cbonon']+$reg3['cbonof'];
-				echo"<tr>
-					<td colspan='2'>Total</td>
-					<td>".$tot_ser."</td>
+				?>
+				<tr>
+					<th colspan='2'>Total</th>
+					<td><?php echo $tot_ser ?></td>
 				</tr>
-				</tbody>
-				</table>";
+			</tbody>
+			</table>
+	<?php
 	}
-	echo "<table summary='consulta de servicios extra otros' border='1px'>
+	?>
+			<table summary='consulta de servicios extra otros' border='1px'>
 			<thead>
 				<tr>
 					<th scope='col' width='300px'>Otros</th>
@@ -115,24 +138,32 @@
 					<th scope='col' width='100px'>Costo</th>
 				</tr>
 			</thead>
-			<tbody>";
-			$registro4=mysql_query("select * from escosol_otro where n_solicitud='$_REQUEST[solicitud]'",$conexion) or
-			die("error en select: ".mysql_error());
-			$f=0;
-			while($reg4=mysql_fetch_array($registro4)){
-				$f=$reg4['precio']+$f;
-			echo"
+			<tbody>
+	<?php
+		while($reg4=mysql_fetch_array($registro4)){
+		$f=$reg4['precio']+$f;
+	?>
 				<tr>
 					<td></td>
-					<td>".$reg4['otro']."</td>
-					<td>".$reg4['precio']."</td>
-				</tr>";
-	}
-			echo "
+					<td><?php echo $reg4['otro']?></td>
+					<td><?php echo $reg4['precio']?></td>
+				</tr>
+	<?php 
+		}
+	?>
 				<tr>
-					<td colspan='2'>Total</td>
-					<td>".$total1=$f."</td> <br />
-			";
-?>
-</tbody>
-</table>
+					<th colspan='2'>Total</th>
+					<td><?php echo $total1=$f ?></td> <br />
+				</tr>
+			</tbody>
+			</table>
+	<?php 
+	} else {
+	?>
+		<label>Registro Inexistente</label>
+		<a href="consultar.php">Volver</a>	
+	<?php
+	}
+	?>
+	</body>
+</html>

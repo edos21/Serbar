@@ -1,47 +1,68 @@
+<?php
+//pantalla para crear presupuesto a diferencia de las demas aparece un query en donde
+//busca el maximo valor en n_presupuesto y le suma 1 para que se incremente el numero de presupuesto
+//de forma automatica
+include ("../../../conexion.php");
+$registro=mysql_query("select max(n_presupuesto) from escopresupuesto",$conexion)or
+die ("error en select".mysql_error());
+?>
 <!DOCTYPE html>
-<html>
+<html lang="es">
 	<head>
+		<meta charset="UTF-8" />
 		<title>Presupuesto</title>
+		<link rel="stylesheet" href="../css/administracion.css" type="text/css"/>
 	</head>
 	<body>
 		<?php
-		$conexion=mysql_connect("localhost","root","") or
-die ("error al conectar");
-mysql_select_db("bdserbar",$conexion) or
-die ("error en la base de datos");
-$registro=mysql_query("select max(n_presupuesto) from escopresupuesto",$conexion)or
-die ("error en select".mysql_error());
-if($reg=mysql_fetch_array($registro)){
-	$pre= $reg[0] + 1;
+		if($reg=mysql_fetch_array($registro)){
+		$pre= $reg[0] + 1;
 		?>
 		<form method="post" action="guardar.php">
-			N&deg; de Presupuesto:
+			<label>N&deg; de Presupuesto: </label>
 			<input type="text" name="presupuesto" value="<?php echo $pre; } ?>"/>
-			N&deg; de Filial:
+			<label>Filial: </label>
 			<input type="text" name="filial" />
-			Codigo de la empresa:
-			<input type="text" name="codigo"/>
-			Nombre de la empresa: 
+			<label>Fecha: </label>
+			<input type="text" name="fecha" />
+			<label>Rif &oacute; CI:</label>
+			<input type="text" name="rif"/>
+			<label>Nombre / Razon Social: </label>
 			<input type="text" name="nombre_emp"/>
-			Correo de la empresa:
+			<label>Telefono de la empresa: </label>
+			<input type="tel" name="telefono" />
+			<label>Direccion de la empresa: </label>
+			<textarea name="direccion" cols="30" rows="5"></textarea>
+			<label>Correo de la empresa: </label>
 			<input type="email" name="mail" />
-			Cedula operador:
+			<label>Cedula operador: </label>
 			<input type="text" name="cedula" />
-			Nombre operador:
+			<label>Nombre operador: </label>
 			<input type="text" name="nombre" />
-			Status del presupuesto: 
+			<label>Status del presupuesto: </label>
 			<select name="status">
 				<option value="evaluacion">Evaluacion</option>
 				<option value="aprobada">Aprobado</option>
-				<option value="rechazado">Rechazado</option>
 				<option value="pendiente">Pendiente</option>
 				<option value="pagado">Pagado</option>
 			</select>
-			Precio: 
+			<div> <!--esta parte va con ajax, son los productos dentro de la factura
+				se guardan en la tabla servicios y los campos son (presupuesto, cantidad, descripcion, precio)-->
+			<label>Servicios:</label><br />
+			<label>Cantidad</label>
+			<input type="text" name="cantidad" />
+			<label>Descripci&oacute;n</label>
+			<input type="text" name="descripcion" />
+			<label>Unitario:</label> 
 			<input type="text" name="precio" />
+			<input type="button" value="Guardar" />
+			</div>
+			<label>Impuesto:</label>
+			<input type="text" name="impuesto" /><label>%</label>
 			<input type="submit" value="Guardar" />
 			<input type="reset" value="Cancelar" />
 			<input type="button" value="Consultar" onclick="location.href='consultar.php'"/>
+			<input type="button" value="Anular" onclick="location.href='anular.php'"/>
 			<input type="button" value="Eliminar" onclick="location.href='eliminar.php'" />
 			<input type="button" value="Modificar" onclick="location.href='modificar.php'" />
 		</form>

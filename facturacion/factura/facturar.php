@@ -1,41 +1,65 @@
 <?php
-$conexion=mysql_connect("localhost","root","") or
-die ("error al conectar");
-mysql_select_db("bdserbar",$conexion) or
-die ("error en la base de datos");
+//trae los datos del presupuesto, pero permite su modificacion en caso de que algo
+//cambien al momento de facturar
+include ("../../conexion.php");
 $registro=mysql_query("select * from presupuesto where n_presupuesto='$_REQUEST[presupuesto]'",$conexion)or
 die ("error en select".mysql_error());
-if($reg=mysql_fetch_array($registro)){
+$regisservicio=mysql_query("select * from servicios where n_presupuesto='$_REQUEST[presupuesto]'",$conexion) or
+die("error en select: ".mysql_error());
+$subtotal=0;
 ?>
-<form method="post" action="guardar.php">
-			N&deg; de Factura:
+<!DOCTYPE html>
+<html lang="es">
+	<head>
+		<meta charset="UTF-8" />
+		<title>Facturar - Factura</title>
+		<link rel="stylesheet" href="../css/administracion.css" type="text/css"/>
+	</head>
+	<body>
+		<?php
+		if($reg=mysql_fetch_array($registro)){
+		?>
+		<form method="post" action="guardar.php">
+			<input type="hidden" name="presupuesto" value="<?php echo $reg['n_presupuesto'] ?>" />
+			<label>N&deg; de Factura: </label>
 			<input type="text" name="factura" />
-			Fecha: 
+			<label>Fecha: </label>
 			<input type="text" name="fecha" />
-			N&deg; de presupuesto:
-			<input type="text" name="presupuesto" value="<?php echo $reg['n_presupuesto'] ?>" />
-			N&deg; de Filial:
+			<label>Filial: </label>
 			<input type="text" name="filial" value="<?php echo $reg['filial'] ?>"/>
-			Codigo de la empresa:
-			<input type="text" name="codigo" value="<?php echo $reg['codigo'] ?>"/>
-			Nombre de la empresa: 
+			<label>Rif</label>
+			<input type="text" name="rif" value="<?php echo $reg['rif'] ?>"/>
+			<label>Nombre de la empresa:</label>
 			<input type="text" name="nombre_emp" value="<?php echo $reg['nombre_emp'] ?>"/>
-			Correo de la empresa:
+			<label>Direccion:</label>
+			<input type="text" name="direccion" value="<?php echo $reg['direccion']?>"/>
+			<label>Telefono:</label>
+			<input type="text" name="telefono" value="<?php echo $reg['telefono']?>"/>
+			<label>Correo de la empresa:</label>
 			<input type="email" name="mail" value="<?php echo $reg['mail'] ?>"/>
-			Cedula operador:
+			<label>Cedula operador:</label>
 			<input type="text" name="cedula" value="<?php echo $reg['cedula'] ?>" />
-			Nombre operador:
+			<label>Nombre operador:</label>
 			<input type="text" name="nombre" value="<?php echo $reg['nombre'] ?>"/>
-			Status de la factura: 
+			<label>Status de la factura: </label>
 			<select name="status">
 				<option value="pendiente">Pendiente</option>
 				<option value="pagado">Pagada</option>
 			</select>
-			Precio: 
-			<input type="text" name="precio" value="<?php echo $reg['precio'] ?>" />
-<input type="submit" value="Guardar" />
-<input type="reset" value="Cancelar" />
-</form>
-<?php
-}
-?>
+			<?php
+			while ($regser=mysql_fetch_array($regisservicio)) {
+			$subtotal=$subtotal+($regser['cantidad']*$regser['precio']);
+			}
+			?>
+			<label>Subtotal: <?php echo $subtotal?></label>
+			<label>Impuesto: <?php echo ($subtotal*$reg['impuesto'])/100?></label>
+			<label>Total: <?php echo (($subtotal*$reg['impuesto'])/100)+$subtotal?></label>
+			<input type="hidden" name="total" value="<?php echo (($subtotal*$reg['impuesto'])/100)+$subtotal?>" />
+			<input type="submit" value="Guardar" />
+			<input type="reset" value="Cancelar" />
+		</form>
+		<?php
+		}
+		?>
+	</body>
+</html>
